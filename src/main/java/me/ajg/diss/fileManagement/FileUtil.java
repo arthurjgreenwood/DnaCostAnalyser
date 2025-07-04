@@ -14,6 +14,8 @@ import java.util.zip.GZIPOutputStream;
  */
 public class FileUtil {
     
+    //TODO add a method to convert a list of files into a tar archive
+    
     /**
      * Coverts a file from a specified path into a byte array
      * This implementation is based on the Converting a File to a Byte Array section of:
@@ -43,7 +45,7 @@ public class FileUtil {
     
     
     /**
-     * Compresses a byte[] using the Gzip algorithm, required for Goldman Encoding
+     * Compresses a byte[] using the Gzip algorithm, required for Goldman and DNA fountain Encoding
      *
      * @param bytes the byte[] to be compressed
      * @return compressed byte[]

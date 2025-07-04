@@ -3,8 +3,6 @@ package me.ajg.diss.encoders;
 import me.ajg.diss.fileManagement.FileUtil;
 import me.ajg.diss.huffman.Huffman;
 
-import java.security.cert.PKIXBuilderParameters;
-import java.time.chrono.MinguoDate;
 import java.util.*;
 
 public class GoldmanEncoder {
@@ -24,8 +22,9 @@ public class GoldmanEncoder {
      * Divided up into sections and using method names equivalent to the document to make it simple to reference
      *
      * @param bytesList, a list of files converted to byte arrays, max size of 9
+     * @return
      */
-    public static void encode(List<byte[]> bytesList) {
+    public static List<String> encode(List<byte[]> bytesList) {
         int IDcounter = 0;
         for (byte[] b : bytesList) {
             //1.1
@@ -48,11 +47,11 @@ public class GoldmanEncoder {
             //1.7 and 1.8
             List<String> s5Indexed = indexDnaCode(s5Complemented, ID);
             //1.9
-            List<String> finalOligos = addEndTags(s5Indexed);
-            
+            return addEndTags(s5Indexed);
             
         }
         
+        return null;
     }
     
     /**
