@@ -12,22 +12,13 @@ public class DNAFountainEncoder {
         //Compress to gzip
         byte[] gzipCompressed = FileUtil.gzipCompression(FileUtil.fileToByteArray(filePath));
         //fragment the data
-        List<byte[]> fragmentedData = fragment(gzipCompressed, fragmentLength);
+        List<byte[]> fragmentedData = FileUtil.fragment(gzipCompressed, fragmentLength);
         //Generate DNA droplets
         LubyTransform lb = new LubyTransform(fragmentedData, INPUT_SEED, redundancy, fragmentLength, maxGcDeviation, maxHomopolymer);
         return lb.getDroplets();
     }
     
  
-    public static List<byte[]> fragment(byte[] bytes, int length){
-        List<byte[]> fragmentedOutput = new ArrayList<>();
-        for (int i = 0; i< bytes.length; i+=length){
-            int size = Math.min(bytes.length - i, length);
-            byte[] tmp = new byte[size];
-            System.arraycopy(bytes, i, tmp, 0, size);
-            fragmentedOutput.add(tmp);
-        }
-        return fragmentedOutput;
-    }
+    
     
 }

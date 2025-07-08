@@ -2,55 +2,56 @@ package me.ajg.diss.encoders;
 
 import me.ajg.diss.fileManagement.FileUtil;
 
-import java.util.Random;
+import java.util.*;
 
 public class ChurchEncoder {
     
-    /**
-     * Encodes a byte[] as DNA code using Church algorithm
-     * 0s will become A or C
-     * 1s will become T or G
-     * @param bytes the byte array to convert
-     * @return a String representation of the DNA code
-     */
-    public static String encode(byte[] bytes){
-        StringBuilder stringBuilder = new StringBuilder();
-        Random random = new Random();
-        String[] bytesAsStringArray = FileUtil.bytesToString(bytes);
-        for (String byteString : bytesAsStringArray) {
-            for(char c : byteString.toCharArray()){
-                if (c == '0')
-                    stringBuilder.append(random.nextBoolean() ? 'A' : 'C');
-                else if (c == '1')
-                    stringBuilder.append(random.nextBoolean() ? 'T' : 'G');
+    public static List<String> encode(String filePath){
+        byte[] fileBytes = FileUtil.fileToByteArray(filePath);
+        List<byte[]> fragmentedBytes = FileUtil.fragment(fileBytes, 12);
+        Random random = new Random(); //For randomly selecting base to 
+        List<String> outputCode = new ArrayList<>();
+        for (int i = 0; i < fragmentedBytes.size(); i++) {
+            StringBuilder payload = new StringBuilder();
+            for (byte b : fragmentedBytes.get(i)) {
+                String binaryRep = String.format("%8s",Integer.toBinaryString(b)).replace(" ", "0");
+                payload.append(binaryRep);
             }
+            StringBuilder output = new StringBuilder();
+            output.append(String.format("%19s",Integer.toBinaryString(i+1)).replace(" ", "0"));
+            output.append(payload);
+            
+            StringBuilder fragment = new StringBuilder();
+            for (int j = 0; j < fragment.length(); j++) {
+                char c = fragment.charAt(j);
+                if (j < 3){
+                    if (c == '0') {
+                        fragment.append(random.nextBoolean() ? 'A' : 'C');
+                    }
+                    else
+                        fragment.append(random.nextBoolean() ? 'T' : 'G');
+                    continue;
+                }
+                
+                String last3 = fragment.substring(j-3);
+                boolean homopolymer = (last3.charAt(0) == last3.charAt(1) && last3.charAt(1) == last3.charAt(2));
+                if (c == '0' && !homopolymer)
+                    fragment.append(random.nextBoolean() ? 'A' : 'C');
+                else if (c == '1' && !homopolymer)
+                    fragment.append(random.nextBoolean() ? 'T' : 'G');
+                else if (c == '0'){
+                    if (last3.equals("AAA"))
+                        fragment.append('C');
+                    else fragment.append('A');
+                }
+                else{
+                    if (last3.equals("TTT"))
+                        fragment.append('G');
+                    else fragment.append('T');
+                }
+            }
+            outputCode.add(fragment.toString());
         }
-        return stringBuilder.toString();
+        return outputCode;
     }
-    
-    public static void split(String input){
-    
-    }
-    
-    
-    public static byte[] decode(String dnaCode){
-        StringBuilder binaryString = new StringBuilder();
-        for (char c : dnaCode.toCharArray()) {
-            if (c == 'A' || c == 'C')
-                binaryString.append(0);
-            else
-                binaryString.append(1);
-        }
-        if (binaryString.length()%8 !=0){
-            System.out.println("Binary output is not the correct length");
-            return null;
-        }
-        byte[] outputBytes = new byte[binaryString.length()/8];
-        for (int i = 0; i < outputBytes.length; i++) {
-            String s = binaryString.substring(i*8, i*8+8);
-            outputBytes[i] = (byte) Integer.parseInt(s, 2);
-        }
-        return outputBytes;
-    }
-    
 }

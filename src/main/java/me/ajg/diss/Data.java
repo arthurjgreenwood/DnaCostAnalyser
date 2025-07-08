@@ -13,9 +13,6 @@ public class Data {
         fileExtension = FileUtil.getFileExtension(filePath);
         churchBytes = FileUtil.fileToByteArray(filePath);
     }
-    
-    public String encodeUsingChurch(){
-        return ChurchEncoder.encode(churchBytes);
-    }
+   
     
 }

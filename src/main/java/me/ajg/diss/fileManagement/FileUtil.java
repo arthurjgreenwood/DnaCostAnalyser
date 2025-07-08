@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
 /**
@@ -74,5 +76,16 @@ public class FileUtil {
             strings[i] = String.format("%8s", Integer.toBinaryString(bytes[i] & 0xFF)).replace(' ', '0');
         }
         return strings;
+    }
+    
+    public static List<byte[]> fragment(byte[] bytes, int length){
+        List<byte[]> fragmentedOutput = new ArrayList<>();
+        for (int i = 0; i< bytes.length; i+=length){
+            int size = Math.min(bytes.length - i, length);
+            byte[] tmp = new byte[size];
+            System.arraycopy(bytes, i, tmp, 0, size);
+            fragmentedOutput.add(tmp);
+        }
+        return fragmentedOutput;
     }
 }
