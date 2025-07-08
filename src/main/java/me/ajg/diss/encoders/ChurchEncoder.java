@@ -28,6 +28,10 @@ public class ChurchEncoder {
         return stringBuilder.toString();
     }
     
+    public static void split(String input){
+    
+    }
+    
     
     public static byte[] decode(String dnaCode){
         StringBuilder binaryString = new StringBuilder();

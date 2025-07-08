@@ -1,6 +1,6 @@
 package me.ajg.diss.demos;
 
-import me.ajg.diss.encoders.GLFSR;
+import me.ajg.diss.encoders.dnaFountain.GLFSR;
 
 public class GLFSRdemo {
     public static void demo() {
