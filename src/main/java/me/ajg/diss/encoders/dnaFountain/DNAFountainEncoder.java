@@ -15,6 +15,7 @@ public class DNAFountainEncoder {
         List<byte[]> fragmentedData = FileUtil.fragment(gzipCompressed, fragmentLength);
         //Generate DNA droplets
         LubyTransform lb = new LubyTransform(fragmentedData, INPUT_SEED, redundancy, fragmentLength, maxGcDeviation, maxHomopolymer);
+        System.out.println(lb.getDroplets());
         return lb.getDroplets();
     }
     

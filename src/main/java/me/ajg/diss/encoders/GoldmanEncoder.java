@@ -3,6 +3,7 @@ package me.ajg.diss.encoders;
 import me.ajg.diss.fileManagement.FileUtil;
 import me.ajg.diss.huffman.Huffman;
 
+import java.io.File;
 import java.util.*;
 
 public class GoldmanEncoder {
@@ -24,7 +25,13 @@ public class GoldmanEncoder {
      * @param bytesList, a list of files converted to byte arrays, max size of 9
      * @return
      */
-    public static List<String> encode(List<byte[]> bytesList) {
+    public static List<String> encode(List<String> filePaths) {
+        
+        List<byte[]> bytesList = new ArrayList<>(); //Allows up to 9 files
+        for (String filePath : filePaths) {
+            bytesList.add(FileUtil.fileToByteArray(filePath));
+        }
+        
         int IDcounter = 0;
         for (byte[] b : bytesList) {
             //1.1
