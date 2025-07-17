@@ -1,27 +1,56 @@
-package me.ajg.diss.data;
+package me.ajg.diss.synthesis;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * A class for storing prices for oligonucleotide sizes and quantities
  */
 
-public class TwistOligoPoolPricing  {
+public class TwistOligoPool  {
     
     int minimumOligos = 2;
     int maximumOligos = 696000;
     int minimumOligoSize = 20;
     int maximumOligoSize = 300;
     double errorRate = 0.0005;
+    double oligoQuantity = 2*Math.pow(10,-16); //represent moles of each oligo
     
-    private final Map<Integer, Map<Integer, Double>> prices = new HashMap<>();
+    private final TreeMap<Integer, TreeMap<Integer, Double>> prices = new TreeMap<>();
     
     /**
      * Uses the insert method to create the price map
      */
-    public TwistOligoPoolPricing(){
+    public TwistOligoPool(){
+        initialisePrices();
+        
+    }
+    
+    /**
+     * Inserts price data into the price map
+     * @param upTo maximum oligo quantity for this tier
+     * @param one 20-120 nucleotide cost
+     * @param two 121-150
+     * @param three 151,200
+     * @param four 201-250
+     * @param five 251-300
+     */
+    private void insert(int upTo, double one, double two, double three, double four, double five){
+            TreeMap<Integer, Double> inner = new TreeMap<>();
+            inner.put(120, one);
+            inner.put(150, two);
+            inner.put(200, three);
+            inner.put(250, four);
+            inner.put(300, five);
+            prices.put(upTo, inner);
+    }
+    
+    public Map<Integer, Map<Integer, Double>> getPrices(){
+        return Collections.unmodifiableMap(prices);
+    }
+    
+    private void initialisePrices(){
         insert(100,400,466,520,689,1030);
         insert(500,800,933,1040,1397,2060);
         insert(1000,1200,1400,1560,2068,3090);
@@ -52,26 +81,19 @@ public class TwistOligoPoolPricing  {
         insert(696000,48720,59160,62640,76560,114422);
     }
     
-    /**
-     * Inserts price data into the price map
-     * @param upTo maximum oligo quantity for this tier
-     * @param one 20-120 nucleotide cost
-     * @param two 121-150
-     * @param three 151,200
-     * @param four 201-250
-     * @param five 251-300
-     */
-    private void insert(int upTo, double one, double two, double three, double four, double five){
-            HashMap<Integer, Double> inner = new HashMap<>();
-            inner.put(120, one);
-            inner.put(150, two);
-            inner.put(200, three);
-            inner.put(250, four);
-            inner.put(300, five);
-            prices.put(upTo, inner);
-    }
-    
-    public Map<Integer, Map<Integer, Double>> getPrices(){
-        return Collections.unmodifiableMap(prices);
+    public double getSpecificPrice(int oligoSize, int oligoQuantity){
+        if (oligoSize < minimumOligoSize || oligoSize > maximumOligoSize){
+            System.out.println("Oligo Size out of range");
+            return -1;
+        }
+        if (oligoQuantity < minimumOligos || oligoQuantity > maximumOligos){
+            System.out.println("Oligo quanitity out of range");
+            return -1;
+        }
+        
+        int quantityTier = prices.ceilingKey(oligoQuantity);
+        int sizeTier = prices.get(quantityTier).ceilingKey(oligoSize);
+        return prices.get(quantityTier).get(sizeTier);
+        
     }
 }

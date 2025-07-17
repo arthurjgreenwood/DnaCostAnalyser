@@ -1,9 +1,7 @@
-package me.ajg.diss.encoders;
+package me.ajg.diss.encoders.goldman;
 
 import me.ajg.diss.fileManagement.FileUtil;
-import me.ajg.diss.huffman.Huffman;
 
-import java.io.File;
 import java.util.*;
 
 public class GoldmanEncoder {
@@ -32,14 +30,14 @@ public class GoldmanEncoder {
             bytesList.add(FileUtil.fileToByteArray(filePath));
         }
         
+        List<String> output = new ArrayList<>();
+        
         int IDcounter = 0;
         for (byte[] b : bytesList) {
             //1.1
             byte[] s0 = FileUtil.gzipCompression(b);
-            System.out.println("s0 = " + Arrays.toString(s0));
             //1.2
             String s1 = huffmanTernaryEncoding(s0);
-            System.out.println("Huffman ternary encoding = " + s1);
             //1.3
             String s2 = base3Length(s1);
             String s3 = padToMultipleOf25(s1, s2);
@@ -54,11 +52,11 @@ public class GoldmanEncoder {
             //1.7 and 1.8
             List<String> s5Indexed = indexDnaCode(s5Complemented, ID);
             //1.9
-            return addEndTags(s5Indexed);
+            output.addAll(addEndTags(s5Indexed));
             
         }
         
-        return null;
+        return output;
     }
     
     /**
@@ -135,7 +133,7 @@ public class GoldmanEncoder {
                         break;
                     case '1':
                         output.append('T');
-                        previousBase = 'A';
+                        previousBase = 'T';
                         break;
                     case '2':
                         output.append('A');
@@ -188,6 +186,7 @@ public class GoldmanEncoder {
     }
     
     public static List<String> fragment(String dnaCode){
+        //TODO return single fragment if DNAcode is less than 100 nts
         if (dnaCode.length()%25 != 0){
             System.out.println("Inputs cannot be fragmented: not a multiple of 25");
             return null;
@@ -224,6 +223,8 @@ public class GoldmanEncoder {
                 }
                 output.add(sb.toString());
             }
+            else
+                output.add(dnaFragments.get(i));
         }
         return output;
     }
@@ -235,10 +236,10 @@ public class GoldmanEncoder {
             String i3 = String.format("%12s", (Integer.toString(i,3))).replace(' ', '0');
             int P = ID;
             for(int j = 1; j<i3.length(); j+=2){
-                P += i3.charAt(i);
+                P += Character.digit(i3.charAt(j), 3);
             }
             //Mod 3 to act as parity trit
-            P %=P;
+            P %=3;
             //1.8
             String IX = String.format("%2s", (Integer.toString(ID,3))).replace(' ', '0') + i3 + P;
             //encodes index string with starting base as current fragments last base

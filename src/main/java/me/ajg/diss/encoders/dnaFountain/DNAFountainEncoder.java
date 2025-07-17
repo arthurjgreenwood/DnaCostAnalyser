@@ -1,9 +1,7 @@
 package me.ajg.diss.encoders.dnaFountain;
 
 import me.ajg.diss.fileManagement.FileUtil;
-import org.w3c.dom.CDATASection;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DNAFountainEncoder {
@@ -15,7 +13,6 @@ public class DNAFountainEncoder {
         List<byte[]> fragmentedData = FileUtil.fragment(gzipCompressed, fragmentLength);
         //Generate DNA droplets
         LubyTransform lb = new LubyTransform(fragmentedData, INPUT_SEED, redundancy, fragmentLength, maxGcDeviation, maxHomopolymer);
-        System.out.println(lb.getDroplets());
         return lb.getDroplets();
     }
     

@@ -60,7 +60,7 @@ public class Soliton {
         double total = 0;
         for (double value : mu)
             total += value;
-        System.out.println("Total probability: " + total);  // Should be ≈ 1.0
+         // total Should be ≈ 1.0
     }
     
     public int getIndex(double random){

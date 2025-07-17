@@ -9,6 +9,7 @@ public class Config {
     private String chosenEncoder;
     private String chosenSequencer;
     private String chosenSynthesis;
+    private String tech;
     
     public String getFilePath() {
         return filePath;
@@ -34,4 +35,5 @@ public class Config {
     public void setChosenSynthesis(String chosenSynthesis) {
         this.chosenSynthesis = chosenSynthesis;
     }
+    
 }

@@ -1,6 +1,4 @@
-package me.ajg.diss.huffman;
-
-import jdk.jshell.spi.ExecutionControl;
+package me.ajg.diss.encoders.goldman;
 
 import java.io.*;
 import java.util.*;

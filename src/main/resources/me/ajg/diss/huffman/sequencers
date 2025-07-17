@@ -1,0 +1,2 @@
+{"platform":"Illumina","name":"test1","qScore":1,"confidenceInQScore":1.0,"minimumInputMassNanoGrams":1.0,"flowCellPrice":1.0,"reagentPrice":1.0,"libraryPrepPrice":1.0,"indexingPrice":1.0,"maxMultiplex":1,"yieldPerFlowCellInGb":1.0}
+{"platform":"Illumina","name":"test2","qScore":2,"confidenceInQScore":2.0,"minimumInputMassNanoGrams":2.0,"flowCellPrice":2.0,"reagentPrice":2.0,"libraryPrepPrice":2.0,"indexingPrice":2.0,"maxMultiplex":2,"yieldPerFlowCellInGb":2.0}

@@ -1,5 +1,4 @@
-import me.ajg.diss.encoders.GoldmanEncoder;
-import me.ajg.diss.huffman.Huffman;
+import me.ajg.diss.encoders.goldman.GoldmanEncoder;
 import org.junit.Test;
 
 import java.util.Arrays;

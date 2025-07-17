@@ -7,20 +7,18 @@ import java.util.Random;
 
 public class LubyTransform {
     
-    //TODO possibly reformat to byte[] instead of BigInteger
-    
     //Constants
     double DELTA = 0.001;
     double CONST = 0.025;
     
-    private GLFSR glfsr;
-    private Soliton soliton;
-    private List<byte[]> fragments;
-    private int fragmentLength;
-    private float maxGcDeviation;
-    private int maxHomopolymer;
+    private final GLFSR glfsr;
+    private final Soliton soliton;
+    private final List<byte[]> fragments;
+    private final int fragmentLength;
+    private final float maxGcDeviation;
+    private final int maxHomopolymer;
     
-    private int requiredOligos;
+    private final int requiredOligos;
     
     public LubyTransform(List<byte[]> fragments, int INPUT_SEED, double redundancy, int fragmentLength, float maxGcDeviation, int maxHomopolymer){
         this.fragments = fragments;
@@ -46,7 +44,7 @@ public class LubyTransform {
             int fragmentsToCombine = soliton.getIndex(random.nextDouble());
             random.setSeed(seed); //replace the seed
             
-            //List to check for repeats
+            //List to check for repeated candidates
             List<byte[]> xorCandidates = new ArrayList<>();
             
             while (xorCandidates.size() < fragmentsToCombine){

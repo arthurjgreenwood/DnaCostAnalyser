@@ -1,0 +1,7 @@
+Allow multiple files for Goldman
+Add error correcting codes to fountain
+Implement error and cost calculations for sequencers
+Implement error calculations for synthesis tech
+Make UI not look terrible
+Update Button clicks to deregister unchecked encoders
+Implement maximum file sizes for each encoder

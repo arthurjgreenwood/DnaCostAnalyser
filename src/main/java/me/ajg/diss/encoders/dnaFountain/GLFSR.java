@@ -18,8 +18,4 @@ public class GLFSR {
         }
         return state;
     }
-    
-    public int getState(){
-        return state;
-    }
 }
