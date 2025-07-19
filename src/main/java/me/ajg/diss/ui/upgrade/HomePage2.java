@@ -1,7 +1,6 @@
 package me.ajg.diss.ui.upgrade;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
-import me.ajg.diss.ui.ToolBar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +9,7 @@ public class HomePage2 extends JFrame {
     ToolBar toolBar;
     FileSelectionPanel fileSelectionPanel;
     MainPanel mainPanel;
+    Config config;
     
     public HomePage2() {
         try {
@@ -17,10 +17,11 @@ public class HomePage2 extends JFrame {
         } catch (UnsupportedLookAndFeelException e) {
             System.out.println("Look and feel not supported");
         }
+        config = new Config();
         
-        this.toolBar = new ToolBar();
-        this.fileSelectionPanel = new FileSelectionPanel();
-        this.mainPanel = new MainPanel();
+        this.toolBar = new ToolBar(this.config);
+        this.fileSelectionPanel = new FileSelectionPanel(this.config);
+        this.mainPanel = new MainPanel(this.config);
         
         
         

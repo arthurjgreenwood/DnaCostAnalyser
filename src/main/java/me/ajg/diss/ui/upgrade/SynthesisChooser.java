@@ -1,4 +1,4 @@
-package me.ajg.diss.ui;
+package me.ajg.diss.ui.upgrade;
 
 import javax.swing.*;
 
@@ -20,5 +20,19 @@ public class SynthesisChooser extends JPanel {
         
         this.add(twist);
         
+    }
+    
+    public static class GoButton extends JButton {
+        
+        public GoButton(Config config) {
+            this.setText("Go");
+            this.addActionListener(e -> {
+                new Outputs(config);
+            });
+            
+            
+            
+            
+        }
     }
 }

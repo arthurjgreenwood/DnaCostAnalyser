@@ -12,12 +12,15 @@ public class FileSelectionPanel extends JPanel {
     private final DefaultListModel<String> listModel;
     private final JList<String> list;
     private final List<File> files;
+    private final Config config;
     
-    public FileSelectionPanel() {
+    public FileSelectionPanel(Config config) {
         files = new ArrayList<>();
         setLayout(new BorderLayout());
         this.listModel = new DefaultListModel<>();
         this.list = new JList<>(listModel);
+        this.config = config;
+        
         
         add(new JScrollPane(list), BorderLayout.CENTER);
         
@@ -38,6 +41,7 @@ public class FileSelectionPanel extends JPanel {
                     if (!listModel.contains(filename)) {
                         listModel.addElement(filename);
                         files.add(f);
+                        this.config.setFiles((ArrayList<File>) files);
                     }
                 }
             }
@@ -47,6 +51,7 @@ public class FileSelectionPanel extends JPanel {
             for (String selected : list.getSelectedValuesList()) {
                 listModel.removeElement(selected);
                 files.removeIf(f -> f.getName().equals(selected));
+                this.config.setFiles((ArrayList<File>) files);
             }
         });
         

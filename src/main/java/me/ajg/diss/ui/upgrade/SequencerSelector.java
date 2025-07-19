@@ -18,10 +18,12 @@ public class SequencerSelector extends JPanel {
     private String selectedPlatform;
     private Map<String, List<String>> platfomMap;
     private List<Sequencer> customSequencers;
+    private Config config;
     
-    public SequencerSelector() {
+    public SequencerSelector(Config config) {
         platfomMap = new HashMap<>();
         customSequencers = new ArrayList<>();
+        this.config = config;
         loadInstruments();
         
         setLayout(new BorderLayout(10,10));
@@ -54,6 +56,17 @@ public class SequencerSelector extends JPanel {
            addInstrument();
         });
         
+        instrumentComboBox.addActionListener(e -> {
+            String selectedInstrumentName = (String) instrumentComboBox.getSelectedItem();
+            if (selectedInstrumentName != null) {
+                for (Sequencer seq : customSequencers) {
+                    if (seq.getName().equals(selectedInstrumentName)) {
+                        config.setChosenSequencer(seq);
+                        break;
+                    }
+                }
+            }
+        });
         
         add(addInstrumentButton, BorderLayout.SOUTH);
         add(platformPanel, BorderLayout.NORTH);
@@ -69,11 +82,6 @@ public class SequencerSelector extends JPanel {
     }
     
     private void addInstrument() {
-        if (selectedPlatform == null){
-            JOptionPane warning = new JOptionPane("Please select a platform", JOptionPane.WARNING_MESSAGE);
-            warning.setVisible(true);
-            return;
-        }
         //modal prevents clicking on the ancestor frame
         
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Add a new instrument for " + selectedPlatform, true);

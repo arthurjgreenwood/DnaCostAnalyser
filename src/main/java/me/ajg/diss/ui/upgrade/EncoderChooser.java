@@ -1,4 +1,4 @@
-package me.ajg.diss.ui;
+package me.ajg.diss.ui.upgrade;
 
 import javax.swing.*;
 
@@ -14,21 +14,30 @@ public class EncoderChooser extends JPanel {
          church.setFocusable(false);
          church.setText("Church");
          church.addActionListener(e -> {
-             this.config.setChosenEncoder("church");
+             if (church.isSelected())
+                this.config.addChosenEncoder("Church");
+             else
+                 this.config.removeChosenEncoder("Church");
          });
          
          JCheckBox goldman = new JCheckBox();
          goldman.setFocusable(false);
          goldman.setText("Goldman");
          goldman.addActionListener(e -> {
-             this.config.setChosenEncoder("goldman");
+             if (goldman.isSelected())
+                this.config.addChosenEncoder("Goldman");
+             else
+                 this.config.removeChosenEncoder("Goldman");
          });
          
          JCheckBox dnaFountain = new JCheckBox();
          dnaFountain.setFocusable(false);
          dnaFountain.setText("DNA Fountain");
          dnaFountain.addActionListener(e -> {
-             this.config.setChosenEncoder("dnaFountain");
+             if (dnaFountain.isSelected())
+                this.config.addChosenEncoder("DNA_Fountain");
+             else
+                 this.config.removeChosenEncoder("DNA_Fountain");
          });
          
          this.add(church);

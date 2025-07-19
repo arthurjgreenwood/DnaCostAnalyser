@@ -14,8 +14,8 @@ public class TwistOligoPool  {
     int maximumOligos = 696000;
     int minimumOligoSize = 20;
     int maximumOligoSize = 300;
-    double errorRate = 0.0005;
-    double oligoQuantity = 2*Math.pow(10,-16); //represent moles of each oligo
+    static double errorRate = 0.0005;
+    static double oligoQuantity = 2*Math.pow(10,-16); //represent moles of each oligo
     
     private final TreeMap<Integer, TreeMap<Integer, Double>> prices = new TreeMap<>();
     
@@ -24,7 +24,6 @@ public class TwistOligoPool  {
      */
     public TwistOligoPool(){
         initialisePrices();
-        
     }
     
     /**
@@ -95,5 +94,9 @@ public class TwistOligoPool  {
         int sizeTier = prices.get(quantityTier).ceilingKey(oligoSize);
         return prices.get(quantityTier).get(sizeTier);
         
+    }
+    
+    public double getOligoQuantity(){
+        return oligoQuantity;
     }
 }

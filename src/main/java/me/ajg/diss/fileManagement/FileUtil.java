@@ -1,8 +1,7 @@
 package me.ajg.diss.fileManagement;
 
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -87,5 +86,23 @@ public class FileUtil {
             fragmentedOutput.add(tmp);
         }
         return fragmentedOutput;
+    }
+    
+    /**
+     * Static method for outputting encoder data to a file
+     * @param fileName the name of the converted file
+     * @param encodingAlgorithm the algorithm used
+     * @param oligos the sequence data
+     */
+    public static void EncoderOutput(String fileName, String encodingAlgorithm, List<String> oligos){
+        File file = new File(fileName+"-"+encodingAlgorithm);
+        try(FileWriter fileWriter = new FileWriter(file)){
+            for(String oligo : oligos){
+                fileWriter.write(oligo + "\n");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        
     }
 }
