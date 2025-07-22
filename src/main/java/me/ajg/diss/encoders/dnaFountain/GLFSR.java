@@ -1,7 +1,7 @@
 
 package me.ajg.diss.encoders.dnaFountain;
 
-public class GLFSR {
+public class GLFSR{
     
     private int state;
     private final int POLY = 0b10100011000000000000000000000000;

@@ -1,5 +1,10 @@
 package me.ajg.diss.synthesis;
 
+import me.ajg.diss.ui.upgrade.Config;
+
+import java.io.File;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SynthesisStats {
@@ -7,7 +12,7 @@ public class SynthesisStats {
     private static final double AVOGADRO = 6.022e23; //Avagadro's constant
     private static final double NUCLEOTIDE_WEIGHT = 318 ; //318 g/mol expected weight of a nucleotide
     
-    String fileName;
+    List<String> fileNames;
     String encodingAlgorithmUsed;
     List<String> oligos;
     int numberOfOligos;
@@ -21,13 +26,14 @@ public class SynthesisStats {
     /**
      * Constructor for Encoding Algorithm Output
      *
-     * @param fileName              the file converted
+     * @param fileNames             the file(s) converted
      * @param encodingAlgorithmUsed the encoder used
      * @param oligos                the encoded data
      * @param molsPerOligo          the number of moles of each oligo produced by the synthesis
      */
-    public SynthesisStats(String fileName, String encodingAlgorithmUsed, List<String> oligos, double molsPerOligo, double synthesisErrorRate) {
-        this.fileName = fileName;
+    public SynthesisStats(List<String> fileNames, String encodingAlgorithmUsed, List<String> oligos, double molsPerOligo, double synthesisErrorRate) {
+        
+        this.fileNames = fileNames;
         this.encodingAlgorithmUsed = encodingAlgorithmUsed;
         this.oligos = oligos;
         numberOfOligos = oligos.size();
@@ -44,22 +50,28 @@ public class SynthesisStats {
     }
     
     public String getOutput() {
-        return "File: " + fileName +
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setGroupingUsed(true);
+        nf.setMaximumFractionDigits(5);
+        TwistOligoPool twistOligoPool = new TwistOligoPool();
+        
+        return "File: " + fileNames.toString() +
                 " (" + encodingAlgorithmUsed + " encoded)\n" +
-                "Produced " + expectedCopiesOfEachOligo + " copies of each oligo\n" +
-                "Expected mass: " + formatExpectedMass() + "\n" +
-                "Synthesis error: " + synthesisErrorRate + "\n" +
-                "Expected correct oligos: " + (expectedCopiesOfEachOligo-(expectedCopiesOfEachOligo*synthesisErrorRate*oligoLength));
+                "Produced " + nf.format(expectedCopiesOfEachOligo) + " copies of each oligo\n" +
+                "Expected mass: " + formatExpectedMass(expectedMass) + "\n" +
+                "Synthesis error: " + nf.format(synthesisErrorRate) + "\n" +
+                "Expected correct oligos: " + nf.format(expectedCopiesOfEachOligo-(expectedCopiesOfEachOligo*synthesisErrorRate*oligoLength)) + "\n" +
+                "Synthesis cost: " + "$" + twistOligoPool.getSpecificPrice(oligoLength, numberOfOligos) + "\n";
     }
+    
     
     
     /**
      * Formats the expected mass into SI unit representation
      * @return mass + units
      */
-    private String formatExpectedMass() {
+    public static String formatExpectedMass(double mass) {
         String unit = "g";
-        double mass = expectedMass;
         if (mass < 1e-12){
             mass *= 1e15;
             unit = "fg";

@@ -2,10 +2,10 @@ package me.ajg.diss.encoders.dnaFountain;
 
 public class DropletScreening {
     
-    private final float acceptableGCDeviation;
+    private final double acceptableGCDeviation;
     private final int maxHomopolymer;
     
-    public DropletScreening(float acceptableGCDeviation, int maxHomopolymer) {
+    public DropletScreening(double acceptableGCDeviation, int maxHomopolymer) {
         this.acceptableGCDeviation = acceptableGCDeviation;
         this.maxHomopolymer = maxHomopolymer;
     }

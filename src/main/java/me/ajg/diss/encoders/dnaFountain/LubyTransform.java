@@ -15,12 +15,12 @@ public class LubyTransform {
     private final Soliton soliton;
     private final List<byte[]> fragments;
     private final int fragmentLength;
-    private final float maxGcDeviation;
+    private final double maxGcDeviation;
     private final int maxHomopolymer;
     
     private final int requiredOligos;
-    
-    public LubyTransform(List<byte[]> fragments, int INPUT_SEED, double redundancy, int fragmentLength, float maxGcDeviation, int maxHomopolymer){
+    //FragmentLength in bytes
+    public LubyTransform(List<byte[]> fragments, int INPUT_SEED, double redundancy, int fragmentLength, double maxGcDeviation, int maxHomopolymer){
         this.fragments = fragments;
         glfsr = new GLFSR(INPUT_SEED);
         soliton = new Soliton(fragments.size(), DELTA, CONST);

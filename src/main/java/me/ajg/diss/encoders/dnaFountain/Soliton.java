@@ -1,6 +1,6 @@
 package me.ajg.diss.encoders.dnaFountain;
 
-public class Soliton {
+public class Soliton{
     
     private int K;
     double[] rho;
@@ -22,7 +22,7 @@ public class Soliton {
     
     public void initialiseSolitonDistribution(){
         for (int d = 1; d <=K; d++){
-            double toSet = 0;
+            double toSet;
             if(d == 1){
                 toSet =  1.0/K;
             }
@@ -71,7 +71,7 @@ public class Soliton {
                 return i+1;
         }
         System.out.println("There was an error initialising the Soliton distribution");
-        return mu.length+1;
+        return 0;
     }
     
     public double getZ(){

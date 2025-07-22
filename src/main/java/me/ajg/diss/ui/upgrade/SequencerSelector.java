@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.ajg.diss.sequencers.Illumina;
+import me.ajg.diss.sequencers.OxfordNanopore;
+import me.ajg.diss.sequencers.PacificBioscience;
 import me.ajg.diss.sequencers.Sequencer;
 
 import javax.swing.*;
@@ -88,7 +90,7 @@ public class SequencerSelector extends JPanel {
         dialog.setLayout(new GridLayout(12,3));
         dialog.setSize(500,500);
         
-        //Adding relavent text Fields
+        //Adding relevant text Fields
         JLabel nameLabel = new JLabel("Instrument name: ");
         JTextField nameField = new JTextField();
         
@@ -149,6 +151,18 @@ public class SequencerSelector extends JPanel {
                platfomMap.computeIfAbsent(selectedPlatform, _ -> new ArrayList<>()).add(name);
                updatePlatform(selectedPlatform);
            }
+           else if (selectedPlatform.equals("PacificBioscience")) {
+               sequencer = new PacificBioscience(name, phredQuality, qualityConfidence, inputMass, flowCellPrice, reagentPrice,
+                       libraryPrepPrice, indexingPrice, maxMultiplex, yield);
+               platfomMap.computeIfAbsent(selectedPlatform, _ -> new ArrayList<>()).add(name);
+               updatePlatform(selectedPlatform);
+           }
+           else if (selectedPlatform.equals("OxfordNanopore")) {
+               sequencer = new OxfordNanopore(name, phredQuality, qualityConfidence, inputMass, flowCellPrice, reagentPrice,
+                       libraryPrepPrice, indexingPrice, maxMultiplex, yield);
+               platfomMap.computeIfAbsent(selectedPlatform, _ -> new ArrayList<>()).add(name);
+               updatePlatform(selectedPlatform);
+           }
            
             if (sequencer != null) {
                 
@@ -163,7 +177,6 @@ public class SequencerSelector extends JPanel {
                     System.out.println("sequencers.txt not found");
                 }
             }
-           //TODO save the data to a datastructure
             dialog.dispose();
         });
         

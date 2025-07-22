@@ -1,1 +1,2 @@
 {"platform":"Illumina","name":"Test1","qScore":40,"confidenceInQScore":90.0,"minimumInputMassNanoGrams":20.0,"flowCellPrice":1200.0,"reagentPrice":948.0,"libraryPrepPrice":23.0,"indexingPrice":41.0,"maxMultiplex":96,"yieldPerFlowCellInGb":500.0}
+{"platform":"Illumina","name":"NovoSeq","qScore":40,"confidenceInQScore":90.0,"minimumInputMassNanoGrams":50.0,"flowCellPrice":1200.0,"reagentPrice":56.0,"libraryPrepPrice":40.0,"indexingPrice":25.0,"maxMultiplex":96,"yieldPerFlowCellInGb":500.0}

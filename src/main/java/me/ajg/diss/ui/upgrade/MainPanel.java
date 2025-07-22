@@ -9,6 +9,7 @@ public class MainPanel extends JPanel {
     private SequencerSelector sequencerSelector;
     private SynthesisChooser synthesisChooser;
     private EncoderChooser encoderChooser;
+    private GoButton goButton;
     
     public MainPanel(Config config) {
         this.config = config;
@@ -19,6 +20,7 @@ public class MainPanel extends JPanel {
         sequencerSelector = new SequencerSelector(this.config);
         synthesisChooser = new SynthesisChooser(this.config);
         encoderChooser = new EncoderChooser(this.config);
+        goButton = new GoButton(this.config);
         
         add(sequencerSelector);
         //+20 prevents cropping of objects
@@ -27,5 +29,6 @@ public class MainPanel extends JPanel {
         
         synthesisChooser.setPreferredSize(new Dimension(encoderChooser.getPreferredSize().width, synthesisChooser.getPreferredSize().height));
         add(synthesisChooser);
+        add(goButton);
     }
 }
