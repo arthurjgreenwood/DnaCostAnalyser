@@ -24,7 +24,7 @@ public class SequencingStats {
         
         TreeMap<Integer, Double> outputMap = new TreeMap<>(); //Represents Depth to sequencing percentage relationship
         
-        for (int depth = 0; depth <= 100; depth++) {
+        for (int depth = 0; depth <= 200; depth++) {
             double probPerfectRead = Math.pow(1-errorRate, oligoLength);
             double probSuccess = 1 - Math.pow(1-probPerfectRead, depth);
             double probMissed = Math.exp(-depth); //Probability an oligo escapes sequencing
@@ -38,6 +38,8 @@ public class SequencingStats {
     public int getCoverageForSpecifiedSuccessRate(double requiredSuccessRate){
         for (var entry : depthMap.entrySet()) {
             if (entry.getValue()>= requiredSuccessRate) {
+                System.out.println("Hello from depth map");
+                System.out.println(depthMap);
                 return entry.getKey();
             }
         }

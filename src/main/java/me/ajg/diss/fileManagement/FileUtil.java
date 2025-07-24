@@ -94,7 +94,7 @@ public class FileUtil {
      * @param encodingAlgorithm the algorithm used
      * @param oligos the sequence data
      */
-    public static void encoderOutput(String fileName, String encodingAlgorithm, List<String> oligos){
+    public static File encoderOutput(String fileName, String encodingAlgorithm, List<String> oligos){
         File file = new File(fileName+"-"+encodingAlgorithm + ".txt");
         try(FileWriter fileWriter = new FileWriter(file)){
             for(String oligo : oligos){
@@ -103,6 +103,6 @@ public class FileUtil {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        
+        return file;
     }
 }

@@ -21,6 +21,7 @@ public class SynthesisStats {
     double molsPerOligo;
     double synthesisErrorRate;
     int oligoLength;
+    double synthesisCost;
     
     
     /**
@@ -42,6 +43,8 @@ public class SynthesisStats {
         expectedMass = calcExpectedMass();
         expectedCopiesOfEachOligo = (int) Math.round(molsPerOligo * AVOGADRO);
         this.synthesisErrorRate = synthesisErrorRate;
+        TwistOligoPool twistOligoPool = new TwistOligoPool();
+        this.synthesisCost = twistOligoPool.getSpecificPrice(oligoLength, numberOfOligos);
     }
     
     private double calcExpectedMass() {
@@ -53,7 +56,6 @@ public class SynthesisStats {
         NumberFormat nf = NumberFormat.getInstance();
         nf.setGroupingUsed(true);
         nf.setMaximumFractionDigits(5);
-        TwistOligoPool twistOligoPool = new TwistOligoPool();
         
         return "File: " + fileNames.toString() +
                 " (" + encodingAlgorithmUsed + " encoded)\n" +
@@ -61,7 +63,7 @@ public class SynthesisStats {
                 "Expected mass: " + formatExpectedMass(expectedMass) + "\n" +
                 "Synthesis error: " + nf.format(synthesisErrorRate) + "\n" +
                 "Expected correct oligos: " + nf.format(expectedCopiesOfEachOligo-(expectedCopiesOfEachOligo*synthesisErrorRate*oligoLength)) + "\n" +
-                "Synthesis cost: " + "$" + twistOligoPool.getSpecificPrice(oligoLength, numberOfOligos) + "\n";
+                "Synthesis cost: " + "$" + synthesisCost + "\n";
     }
     
     
@@ -91,4 +93,13 @@ public class SynthesisStats {
         return String.format("%.3f %s", mass, unit);
     }
     
+    public double getSynthesisCost() {
+        return synthesisCost;
+    }
+    public int getNumberOfOligos() {
+        return numberOfOligos;
+    }
+    public int getOligoLength(){
+        return oligoLength;
+    }
 }

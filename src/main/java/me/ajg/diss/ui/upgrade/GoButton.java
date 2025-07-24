@@ -4,8 +4,6 @@ import me.ajg.diss.encoders.ChurchEncoder;
 import me.ajg.diss.encoders.dnaFountain.DNAFountainEncoder;
 import me.ajg.diss.encoders.goldman.GoldmanEncoder;
 import me.ajg.diss.fileManagement.FileUtil;
-import me.ajg.diss.synthesis.SynthesisStats;
-import me.ajg.diss.synthesis.TwistOligoPool;
 
 import javax.swing.*;
 import java.io.File;
@@ -36,6 +34,7 @@ public class GoButton extends JButton {
             }
             
             int goldmanFileCounter = 1; // Numbering the Goldman files if it exceeds 9 files
+            List<OutputObject> outputObjects = new ArrayList<>();
             
             for (int i = 0; i < this.config.getFiles().size(); i++) {
                 String filename = this.config.getFiles().get(i).getName();
@@ -44,33 +43,32 @@ public class GoButton extends JButton {
                     if (encoder.equals("Goldman") && i % 9 == 0) {
                         List<String> filePaths = new ArrayList<>();
                         List<String> fileNames = new ArrayList<>();
+                        long fileSize = 0;
                         for (int j = i; j < (i + 9) && j < this.config.getFiles().size(); j++) {
                             filePaths.add(this.config.getFiles().get(j).getPath());
                             fileNames.add(this.config.getFiles().get(j).getName());
+                            fileSize+= this.config.getFiles().get(j).length();
                         }
                         List<String> oligos = GoldmanEncoder.encode(filePaths);
-                        FileUtil.encoderOutput(new File(this.config.getOutputDir(), "batch_" + goldmanFileCounter++).getPath(), "Goldman", oligos);
-                        SynthesisStats stats = new SynthesisStats(fileNames, "Goldman", oligos, TwistOligoPool.oligoQuantity, TwistOligoPool.errorRate);
+                        File outputName = FileUtil.encoderOutput(new File(this.config.getOutputDir(), "batch_" + goldmanFileCounter++).getPath(), "Goldman", oligos);
+                        outputObjects.add(new OutputObject(this.config, outputName.getName(), fileNames.toString(), "Goldman", oligos, fileSize));
                         
                     }
                     if (encoder.equals("Church")) {
                         List<String> oligos = ChurchEncoder.encode(this.config.getFiles().get(i).getPath(), 10);
-                        FileUtil.encoderOutput(new File(this.config.getOutputDir(), filename).getPath(), "Church", oligos);
-                        ArrayList<String> files = new ArrayList<>();
-                        files.add(filename);
-                        SynthesisStats stats = new SynthesisStats(files, "Church", oligos,  TwistOligoPool.oligoQuantity, TwistOligoPool.errorRate);
-                        
+                        File outputName = FileUtil.encoderOutput(new File(this.config.getOutputDir(), filename).getPath(), "Church", oligos);
+                        long fileSize = this.config.getFiles().get(i).length();
+                        outputObjects.add(new OutputObject(this.config, outputName.getName(), filename, "Church", oligos, fileSize));
                     }
                     if (encoder.equals("DNA_Fountain")) {
                         List<String> oligos = DNAFountainEncoder.encode(this.config.getFiles().get(i).getPath(), 42, 0.03, 32, 0.01, 6);
-                        FileUtil.encoderOutput(new File(this.config.getOutputDir(), filename).getPath(), "DNA_Fountain", oligos);
-                        ArrayList<String> files = new ArrayList<>();
-                        files.add(filename);
-                        SynthesisStats stats = new SynthesisStats(files, "DNA Fountain", oligos, TwistOligoPool.oligoQuantity, TwistOligoPool.errorRate);
-                        
+                        File outputName = FileUtil.encoderOutput(new File(this.config.getOutputDir(), filename).getPath(), "DNA_Fountain", oligos);
+                        long fileSize = this.config.getFiles().get(i).length();
+                        outputObjects.add(new OutputObject(this.config, outputName.getName(), filename, "DNA_Fountain", oligos, fileSize));
                     }
                 }
             }
+            OutputObject.printStats(outputObjects);
         });
     }
 }

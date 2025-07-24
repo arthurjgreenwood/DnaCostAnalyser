@@ -39,9 +39,9 @@ public abstract class Sequencer {
     }
     
     public double calculateErrorRate(){
-        double baseError = 10*Math.pow(10, (double) (-qScore) /10);
-        double remainingError = 10*Math.pow(10, (double) (-qScore+10)/10); //Assumes 10x lower Q score for unknowns
-        return (baseError*confidenceInQScore)+(remainingError*(1-confidenceInQScore));
+        double baseError = Math.pow(10, (double) (-qScore) /10);
+        double remainingError = Math.pow(10, (double) (-qScore+10)/10); //Assumes 10x lower Q score for unknowns
+        return (baseError*(confidenceInQScore/100))+(remainingError*(1-(confidenceInQScore/100)));
     }
     
     public String getPlatform() {
