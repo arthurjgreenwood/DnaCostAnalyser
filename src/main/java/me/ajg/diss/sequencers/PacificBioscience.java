@@ -1,5 +1,8 @@
 package me.ajg.diss.sequencers;
 
+/**
+ * Represents a Pacific Bioscience Sequencer
+ */
 public class PacificBioscience extends Sequencer {
         
         public PacificBioscience (String name, int qScore, double confidenceInQScore, double minimumInputMassNanoGrams,

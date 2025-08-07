@@ -15,8 +15,6 @@ import java.util.zip.GZIPOutputStream;
  */
 public class FileUtil {
     
-    //TODO add a method to convert a list of files into a tar archive
-    
     /**
      * Coverts a file from a specified path into a byte array
      * This implementation is based on the Converting a File to a Byte Array section of:
@@ -77,6 +75,12 @@ public class FileUtil {
         return strings;
     }
     
+    /**
+     * Fragments a byte array into specified size
+     * @param bytes the byte array to be fragmented
+     * @param length the size of each fragment
+     * @return List of the fragmented byte array
+     */
     public static List<byte[]> fragment(byte[] bytes, int length){
         List<byte[]> fragmentedOutput = new ArrayList<>();
         for (int i = 0; i< bytes.length; i+=length){

@@ -1,5 +1,9 @@
 package me.ajg.diss.encoders.dnaFountain;
 
+/**
+ * A class representing a Soliton Distribution
+ */
+
 public class Soliton{
     
     private int K;
@@ -10,6 +14,12 @@ public class Soliton{
     double c;
     double Z = 0; //Normalisation value
     
+    /**
+     * Constructor
+     * @param numberOfFragments the maximum value for degree - d
+     * @param delta the maximum permissable chance of failure given d droplets
+     * @param c a constant affecting droplet composition
+     */
     public Soliton(int numberOfFragments, double delta, double c){
         K = numberOfFragments;
         rho = new double[K];
@@ -20,6 +30,10 @@ public class Soliton{
         initialiseSolitonDistribution();
     }
     
+    
+    /**
+     * Applies constructor parameters to form the ideal and robust Soliton distribution
+     */
     public void initialiseSolitonDistribution(){
         for (int d = 1; d <=K; d++){
             double toSet;
@@ -63,6 +77,11 @@ public class Soliton{
          // total Should be ≈ 1.0
     }
     
+    /**
+     * Obtains an index from the Soliton distribution
+     * @param random a pseudo random number
+     * @return an index from the distribution
+     */
     public int getIndex(double random){
         double cumulativeProbability = 0;
         for (int i = 0; i< mu.length; i ++){

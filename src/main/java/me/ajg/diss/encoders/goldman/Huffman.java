@@ -3,13 +3,16 @@ package me.ajg.diss.encoders.goldman;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Utility class for converting the huffman codes given in Goldman et al (2013) to a map of bytes to trits
+ */
+
 public class Huffman {
     
     /**
-     * Utility class for converting the huffman codes given in Goldman et al (2013) to a map of bytes to trits
-     * @return Hashmap associating byte values with trits
+     * Provides the static huffman map of bytes to trit codes
+     * @return Map<Byte to be converted, Ternary representation>
      */
-    
     public static Map<String, String>getHuffmanCodeList(){
         Map<String, String> output = new HashMap<>();
         

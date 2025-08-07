@@ -2,6 +2,10 @@ package me.ajg.diss.demos;
 
 import me.ajg.diss.encoders.dnaFountain.GLFSR;
 
+/**
+ * A demo class for outputting Integers from the GLFSR
+ */
+
 public class GLFSRdemo {
     public static void demo() {
         GLFSR glfsr = new GLFSR(1923846);

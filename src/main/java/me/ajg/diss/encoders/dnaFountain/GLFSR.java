@@ -1,6 +1,10 @@
 
 package me.ajg.diss.encoders.dnaFountain;
 
+/**
+ * An implementation of a Galois Linear Feedback Shift Register
+ */
+
 public class GLFSR{
     
     private int state;
@@ -10,6 +14,10 @@ public class GLFSR{
         state = seed;
     }
     
+    /**
+     * Obtains the next pseudo random number
+     * @return a pseudo random integer
+     */
     public int next(){
         int lsb = state & 0b1; // check output bit
         state >>>= 1; //unsigned right shift the whole state

@@ -7,11 +7,19 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+/**
+ * The Church Encoder
+ */
 public class ChurchEncoder {
-    
+    /**
+     * A static method to perform church encoding on
+     * @param filePath the file to be encoded
+     * @param bytesPerFragment the number of bytes for each fragment
+     * @return A List of Church encoded oligos
+     */
     public static List<String> encode(String filePath, int bytesPerFragment){
         byte[] fileBytes = FileUtil.fileToByteArray(filePath);
-        List<byte[]> fragmentedBytes = FileUtil.fragment(fileBytes, 12);
+        List<byte[]> fragmentedBytes = FileUtil.fragment(fileBytes, bytesPerFragment);
         Random random = new Random(); //For randomly selecting base
         List<String> outputCode = new ArrayList<>();
         if (fragmentedBytes.size() > Math.pow(2,19)) {

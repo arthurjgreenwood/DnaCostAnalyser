@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * A class to perform Luby Transforms
+ */
+
 public class LubyTransform {
     
     //Constants
@@ -19,7 +23,16 @@ public class LubyTransform {
     private final int maxHomopolymer;
     
     private final int requiredOligos;
-    //FragmentLength in bytes
+    
+    /**
+     * Constructor
+     * @param fragments the fragments to be encoded
+     * @param INPUT_SEED the initial seed for the random number generator
+     * @param redundancy the percentage of bytes to be generated above the required value
+     * @param fragmentLength length of each fragment in bytes
+     * @param maxGcDeviation the maximum acceptable GC deviation from 50%
+     * @param maxHomopolymer the maximum homopolymer length
+     */
     public LubyTransform(List<byte[]> fragments, int INPUT_SEED, double redundancy, int fragmentLength, double maxGcDeviation, int maxHomopolymer){
         this.fragments = fragments;
         glfsr = new GLFSR(INPUT_SEED);
@@ -32,6 +45,10 @@ public class LubyTransform {
         System.out.println(requiredOligos + " required Oligos");
     }
     
+    /**
+     * Performs a Luby transform, XORing specific droplets according to a Soliton Distribution
+     * @return List of Valid droplets
+     */
     public List<String> getDroplets(){
         
         List<String> outputDroplets = new ArrayList<>();
@@ -77,8 +94,6 @@ public class LubyTransform {
             byte[] seededDroplet = new byte[seedAsBytes.length + droplet.length];
             System.arraycopy(seedAsBytes, 0, seededDroplet, 0, seedAsBytes.length);
             System.arraycopy(droplet, 0, seededDroplet, seedAsBytes.length, droplet.length);
-            
-            //TODO add RS code or parity check here
             
             //Only adds if the droplet passes the screening stage
             String dnaString = screener.convertToDNA(seededDroplet);

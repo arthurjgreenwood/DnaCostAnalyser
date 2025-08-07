@@ -1,5 +1,8 @@
 package me.ajg.diss.sequencers;
 
+/**
+ * Represents an Illumina Sequencer
+ */
 public class Illumina extends Sequencer{
     
     public Illumina (String name, int qScore, double confidenceInQScore, double minimumInputMassNanoGrams,

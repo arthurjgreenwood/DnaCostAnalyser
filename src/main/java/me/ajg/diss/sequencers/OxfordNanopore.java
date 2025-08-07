@@ -1,5 +1,9 @@
 package me.ajg.diss.sequencers;
 
+/**
+ * Represents an Oxford Nanopore Sequencer
+ */
+
 public class OxfordNanopore extends Sequencer {
         
         public OxfordNanopore (String name, int qScore, double confidenceInQScore, double minimumInputMassNanoGrams,

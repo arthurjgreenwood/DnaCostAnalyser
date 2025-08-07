@@ -4,6 +4,9 @@ import me.ajg.diss.synthesis.TwistOligoPool;
 
 import java.util.TreeMap;
 
+/**
+ * A class used to generate the output statistics for sequencers
+ */
 public class SequencingStats {
     
     int numberOfOligos;
@@ -12,6 +15,13 @@ public class SequencingStats {
     int maximumDepth; //Represents the maximum number possible depth given a flow cells maximum output
     public TreeMap<Integer, Double> depthMap;
     
+    /**
+     * Constructor
+     * @param sequencer The sequencer object to use
+     * @param numberOfOligos the number of oligos
+     * @param oligoLength the size of each oligo
+     */
+    
     public SequencingStats(Sequencer sequencer, int numberOfOligos, int oligoLength) {
         this.sequencer = sequencer;
         this.numberOfOligos = numberOfOligos;
@@ -19,6 +29,10 @@ public class SequencingStats {
         this.maximumDepth = (int) Math.floor((this.sequencer.getYieldPerFlowCellInGb()*10e9)/(double) oligoLength);
         calculateDepthErrorRates();
     }
+    
+    /**
+     * Creates a Map associating a specific sequencing depth with the probability of successful oligo recovery
+     */
     
     public void calculateDepthErrorRates(){
         
@@ -36,6 +50,11 @@ public class SequencingStats {
         this.depthMap = outputMap;
     }
     
+    /**
+     * Obtains the required coverage for a specified success rate from the generated depth map
+     * @param requiredSuccessRate the desired success rate
+     * @return the required sequencing coverage
+     */
     public int getCoverageForSpecifiedSuccessRate(double requiredSuccessRate){
         for (var entry : depthMap.entrySet()) {
             if (entry.getValue()>= requiredSuccessRate) {
@@ -46,6 +65,11 @@ public class SequencingStats {
         }
         return 0;
     }
+    
+    /**
+     * Calculates the total cost of sequencing
+     * @return total cost
+     */
     
     public double calculateSequencingCost(){
         double totalCost = 0;

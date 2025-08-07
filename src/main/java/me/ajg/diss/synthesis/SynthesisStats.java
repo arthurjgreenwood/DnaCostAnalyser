@@ -1,11 +1,11 @@
 package me.ajg.diss.synthesis;
 
-import me.ajg.diss.ui.upgrade.Config;
-
-import java.io.File;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Formats the statistics for DNA synthesis
+ */
 
 public class SynthesisStats {
     
