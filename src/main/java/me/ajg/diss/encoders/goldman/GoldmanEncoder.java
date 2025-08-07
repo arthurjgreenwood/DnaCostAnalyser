@@ -6,21 +6,11 @@ import java.util.*;
 
 public class GoldmanEncoder {
     
-    /*
-    Key bugs discovered:
-        huffman code checking against binary string instead of denary representation of byte
-        missing break statement was adding and error base after every C
-        String builders were appending spaces and 0s to the wrong string, causing error bases
-        DNA complement tags not working:
-        Error bases in 1.7
-        ID tags were variable lengths
-     */
-    
     /**
      * Encodes binary data using the algorithm presented in Goldman 2013b
      * Divided up into sections and using method names equivalent to the document to make it simple to reference
      *
-     * @param bytesList, a list of files converted to byte arrays, max size of 9
+     * @param filePaths, a list of files to be converted
      * @return
      */
     public static List<String> encode(List<String> filePaths) {
@@ -73,7 +63,6 @@ public class GoldmanEncoder {
             String decimalStr = Integer.toString(b & 0xFF); // unsigned byte as decimal string
             output.append(huffmanCodeList.get(decimalStr));
         }
-        
         return output.toString();
     }
     
@@ -186,7 +175,6 @@ public class GoldmanEncoder {
     }
     
     public static List<String> fragment(String dnaCode){
-        //TODO return single fragment if DNAcode is less than 100 nts
         if (dnaCode.length()%25 != 0){
             System.out.println("Inputs cannot be fragmented: not a multiple of 25");
             return null;

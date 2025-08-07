@@ -77,5 +77,13 @@ public class Soliton{
     public double getZ(){
         return Z;
     }
-    
+    public double[] getMu(){
+        return mu;
+    }
+    public double[] getRho(){
+        return rho;
+    }
+    public double[] getTau(){
+        return tau;
+    }
 }

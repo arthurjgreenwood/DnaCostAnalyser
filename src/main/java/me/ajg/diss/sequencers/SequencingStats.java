@@ -1,5 +1,7 @@
 package me.ajg.diss.sequencers;
 
+import me.ajg.diss.synthesis.TwistOligoPool;
+
 import java.util.TreeMap;
 
 public class SequencingStats {
@@ -8,7 +10,7 @@ public class SequencingStats {
     int oligoLength;
     Sequencer sequencer;
     int maximumDepth; //Represents the maximum number possible depth given a flow cells maximum output
-    TreeMap<Integer, Double> depthMap;
+    public TreeMap<Integer, Double> depthMap;
     
     public SequencingStats(Sequencer sequencer, int numberOfOligos, int oligoLength) {
         this.sequencer = sequencer;
@@ -20,8 +22,7 @@ public class SequencingStats {
     
     public void calculateDepthErrorRates(){
         
-        double errorRate = sequencer.calculateErrorRate();
-        
+        double errorRate = sequencer.calculateErrorRate() + TwistOligoPool.errorRate ;
         TreeMap<Integer, Double> outputMap = new TreeMap<>(); //Represents Depth to sequencing percentage relationship
         
         for (int depth = 0; depth <= 200; depth++) {

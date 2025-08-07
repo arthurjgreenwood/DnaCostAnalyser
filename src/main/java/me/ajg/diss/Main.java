@@ -1,9 +1,9 @@
 package me.ajg.diss;
 
-import me.ajg.diss.ui.upgrade.HomePage2;
+import me.ajg.diss.ui.upgrade.MainFrame;
 
 public class Main {
     public static void main(String[] args) {
-        new HomePage2();
+        new MainFrame();
     }
 }

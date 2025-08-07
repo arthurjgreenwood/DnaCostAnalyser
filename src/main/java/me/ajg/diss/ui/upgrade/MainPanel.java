@@ -24,11 +24,15 @@ public class MainPanel extends JPanel {
         
         add(sequencerSelector);
         //+20 prevents cropping of objects
-        this.setPreferredSize(new Dimension(sequencerSelector.getPreferredSize().width +20, HomePage2.HEIGHT ));
+        this.setPreferredSize(new Dimension(sequencerSelector.getPreferredSize().width +20, MainFrame.HEIGHT ));
         add(encoderChooser);
         
         synthesisChooser.setPreferredSize(new Dimension(encoderChooser.getPreferredSize().width, synthesisChooser.getPreferredSize().height));
         add(synthesisChooser);
-        add(goButton);
+        add(new JSeparator());
+        JPanel goButtonPanel = new JPanel();
+        goButtonPanel.setLayout(new BorderLayout());
+        goButtonPanel.add(goButton, BorderLayout.EAST);
+        add(goButtonPanel);
     }
 }

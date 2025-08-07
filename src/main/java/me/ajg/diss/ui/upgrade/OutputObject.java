@@ -29,8 +29,9 @@ public class OutputObject {
     private SequencingStats coverage;
     private String encodingAlgorithmUsed;
     private long fileSize;
+    private long encodingDuration;
     
-    public OutputObject(Config config, String encodedFileName, String filesEncoded, String encodingAlgorithmUsed, List<String> oligos, long fileSize) {
+    public OutputObject(Config config, String encodedFileName, String filesEncoded, String encodingAlgorithmUsed, List<String> oligos, long fileSize, long encodingDuration) {
         this.config = config;
         this.encodedFileName = encodedFileName;
         this.encodingAlgorithmUsed = encodingAlgorithmUsed;
@@ -39,6 +40,7 @@ public class OutputObject {
         this.synthesisStats = new SynthesisStats(new ArrayList<>(List.of(filesEncoded)), encodingAlgorithmUsed, oligos,
                 TwistOligoPool.oligoQuantity, TwistOligoPool.errorRate);
         this.coverage = new SequencingStats(this.config.getChosenSequencer(), oligos.size(), oligos.getFirst().length());
+        this.encodingDuration = encodingDuration;
     }
     
      public static void printStats(List<OutputObject> outputObjects) {
@@ -67,6 +69,7 @@ public class OutputObject {
                             +outputObject.synthesisStats.getSynthesisCost()));
             output.append(String.format("Efficiency: %.2fbits/nt", (outputObject.fileSize*8.0)/((long) outputObject.synthesisStats.getNumberOfOligos() *
                     outputObject.synthesisStats.getOligoLength()))).append("\n");
+            output.append(String.format("Encoding time: %d ms%n", outputObject.encodingDuration)).append("\n\n");
         }
          FileWriter writer;
          try {

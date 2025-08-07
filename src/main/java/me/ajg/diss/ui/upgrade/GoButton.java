@@ -49,22 +49,33 @@ public class GoButton extends JButton {
                             fileNames.add(this.config.getFiles().get(j).getName());
                             fileSize+= this.config.getFiles().get(j).length();
                         }
+                        long start = System.nanoTime();
                         List<String> oligos = GoldmanEncoder.encode(filePaths);
+                        long end = System.nanoTime();
+                        long durationInMillis = (end - start) / 1_000_000;
                         File outputName = FileUtil.encoderOutput(new File(this.config.getOutputDir(), "batch_" + goldmanFileCounter++).getPath(), "Goldman", oligos);
-                        outputObjects.add(new OutputObject(this.config, outputName.getName(), fileNames.toString(), "Goldman", oligos, fileSize));
+                        outputObjects.add(new OutputObject(this.config, outputName.getName(), fileNames.toString(), "Goldman", oligos, fileSize, durationInMillis));
                         
                     }
                     if (encoder.equals("Church")) {
+                        long start = System.nanoTime();
                         List<String> oligos = ChurchEncoder.encode(this.config.getFiles().get(i).getPath(), 10);
+                        long end = System.nanoTime();
+                        long durationInMillis = (end - start) / 1_000_000;
+                       
                         File outputName = FileUtil.encoderOutput(new File(this.config.getOutputDir(), filename).getPath(), "Church", oligos);
                         long fileSize = this.config.getFiles().get(i).length();
-                        outputObjects.add(new OutputObject(this.config, outputName.getName(), filename, "Church", oligos, fileSize));
+                        outputObjects.add(new OutputObject(this.config, outputName.getName(), filename, "Church", oligos, fileSize, durationInMillis));
                     }
                     if (encoder.equals("DNA_Fountain")) {
+                        long start = System.nanoTime();
                         List<String> oligos = DNAFountainEncoder.encode(this.config.getFiles().get(i).getPath(), 42, 0.03, 32, 0.01, 6);
+                        long end = System.nanoTime();
+                        long durationInMillis = (end - start) / 1_000_000;
+                        
                         File outputName = FileUtil.encoderOutput(new File(this.config.getOutputDir(), filename).getPath(), "DNA_Fountain", oligos);
                         long fileSize = this.config.getFiles().get(i).length();
-                        outputObjects.add(new OutputObject(this.config, outputName.getName(), filename, "DNA_Fountain", oligos, fileSize));
+                        outputObjects.add(new OutputObject(this.config, outputName.getName(), filename, "DNA_Fountain", oligos, fileSize, durationInMillis));
                     }
                 }
             }

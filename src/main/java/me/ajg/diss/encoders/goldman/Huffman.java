@@ -13,7 +13,7 @@ public class Huffman {
     public static Map<String, String>getHuffmanCodeList(){
         Map<String, String> output = new HashMap<>();
         
-        try (InputStream in = Huffman.class.getResourceAsStream("/me/ajg/diss/huffman/View_huff3.cd.new.correct")){
+        try (InputStream in = Huffman.class.getResourceAsStream("/me/ajg/diss/huffman/huffmanCode")){
             if (in == null){
                 System.out.println("Huffman view not found");
                 return null;
@@ -24,14 +24,13 @@ public class Huffman {
             for (int i = 0; i<=255; i++) {
                 try{
                     String line = Objects.requireNonNull(reader).readLine();
-                    String[] parts = line.split("\\s+");
-                    output.put((parts[0]), (parts[3]));
+                    String[] parts = line.split(" ");
+                    output.put((parts[0]), (parts[1]));
                 }
                 catch (IOException e){
                     System.out.println("Error occurred reading huffman file");
                 }
             }
-            System.out.println("Huffman code list: " + output);
             return output;
             
         } catch (IOException e) {

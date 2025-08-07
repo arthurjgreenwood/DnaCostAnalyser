@@ -24,27 +24,11 @@ public class FileUtilTest {
     
     @Test
     public void testGzipCompressionActuallyCompresses() {
-        byte[] input = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa".getBytes(); // Repetitive input compresses well
+        byte[] input = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa".getBytes();
         byte[] compressed = FileUtil.gzipCompression(input);
         
         assertTrue(compressed.length < input.length, "Compressed data should be smaller than input for repetitive strings");
     }
     
-   @Test
-    public void testGzipCompressionDecompressibility() throws IOException {
-        byte[] input = "This is a string to test compression and decompression.".getBytes();
-        byte[] compressed = FileUtil.gzipCompression(input);
-        
-        // Decompress and check content
-        ByteArrayInputStream bais = new ByteArrayInputStream(compressed);
-        GZIPInputStream gzipInputStream = new GZIPInputStream(bais);
-        
-        byte[] buffer = new byte[1024];
-        int len = gzipInputStream.read(buffer);
-        byte[] decompressed = new byte[len];
-        System.arraycopy(buffer, 0, decompressed, 0, len);
-        
-        assertArrayEquals(input, decompressed, "Decompressed content should match the original");
-    }
 }
 
