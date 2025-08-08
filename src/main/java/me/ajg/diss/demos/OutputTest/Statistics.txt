@@ -1,0 +1,113 @@
+test.png-Church.txt
+File: [test.png] (Church encoded)
+Produced 120,440,000 copies of each oligo
+Expected mass: 55.746 ng
+Synthesis error: 0.0005
+Expected correct oligos: 114,478,220
+Synthesis cost: $3120.0
+Sequencing Cost (single run): $8577.88
+Sequencing Cost (multiplexed): $89.35
+Minimum Coverage: 7
+Total Cost (single run): $11697.88
+Total Cost (multiplexed): $3209.35
+Efficiency: 0.83bits/nt
+Encoding time: 43 ms
+
+
+batch_1-Goldman.txt
+File: [[test.png, Team13 Spec V1.2.docx, goldklumpen.png]] (Goldman encoded)
+Produced 120,440,000 copies of each oligo
+Expected mass: 4.615 µg
+Synthesis error: 0.0005
+Expected correct oligos: 113,394,260
+Synthesis cost: $48720.0
+Sequencing Cost (single run): $8577.88
+Sequencing Cost (multiplexed): $89.35
+Minimum Coverage: 5
+Total Cost (single run): $57297.88
+Total Cost (multiplexed): $48809.35
+Efficiency: 0.35bits/nt
+Encoding time: 977 ms
+
+
+test.png-DNA_Fountain.txt
+File: [test.png] (DNA_Fountain encoded)
+Produced 120,440,000 copies of each oligo
+Expected mass: 28.639 ng
+Synthesis error: 0.0005
+Expected correct oligos: 111,768,320
+Synthesis cost: $2800.0
+Sequencing Cost (single run): $8577.88
+Sequencing Cost (multiplexed): $89.35
+Minimum Coverage: 3
+Total Cost (single run): $11377.88
+Total Cost (multiplexed): $2889.35
+Efficiency: 1.57bits/nt
+Encoding time: 83 ms
+
+
+Team13 Spec V1.2.docx-Church.txt
+File: [Team13 Spec V1.2.docx] (Church encoded)
+Produced 120,440,000 copies of each oligo
+Expected mass: 1.920 µg
+Synthesis error: 0.0005
+Expected correct oligos: 114,478,220
+Synthesis cost: $21000.0
+Sequencing Cost (single run): $8577.88
+Sequencing Cost (multiplexed): $89.35
+Minimum Coverage: 7
+Total Cost (single run): $29577.88
+Total Cost (multiplexed): $21089.35
+Efficiency: 0.83bits/nt
+Encoding time: 1063 ms
+
+
+Team13 Spec V1.2.docx-DNA_Fountain.txt
+File: [Team13 Spec V1.2.docx] (DNA_Fountain encoded)
+Produced 120,440,000 copies of each oligo
+Expected mass: 897.912 ng
+Synthesis error: 0.0005
+Expected correct oligos: 111,768,320
+Synthesis cost: $13802.0
+Sequencing Cost (single run): $8577.88
+Sequencing Cost (multiplexed): $89.35
+Minimum Coverage: 3
+Total Cost (single run): $22379.88
+Total Cost (multiplexed): $13891.35
+Efficiency: 1.73bits/nt
+Encoding time: 3898 ms
+
+
+goldklumpen.png-Church.txt
+File: [goldklumpen.png] (Church encoded)
+Produced 120,440,000 copies of each oligo
+Expected mass: 1.865 ng
+Synthesis error: 0.0005
+Expected correct oligos: 114,478,220
+Synthesis cost: $800.0
+Sequencing Cost (single run): $8577.88
+Sequencing Cost (multiplexed): $89.35
+Minimum Coverage: 7
+Total Cost (single run): $9377.88
+Total Cost (multiplexed): $889.35
+Efficiency: 0.83bits/nt
+Encoding time: 1 ms
+
+
+goldklumpen.png-DNA_Fountain.txt
+File: [goldklumpen.png] (DNA_Fountain encoded)
+Produced 120,440,000 copies of each oligo
+Expected mass: 1.187 ng
+Synthesis error: 0.0005
+Expected correct oligos: 111,768,320
+Synthesis cost: $933.0
+Sequencing Cost (single run): $8577.88
+Sequencing Cost (multiplexed): $89.35
+Minimum Coverage: 3
+Total Cost (single run): $9510.88
+Total Cost (multiplexed): $1022.35
+Efficiency: 1.27bits/nt
+Encoding time: 4 ms
+
+
+
