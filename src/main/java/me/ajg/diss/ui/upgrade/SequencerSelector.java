@@ -128,7 +128,6 @@ public class SequencerSelector extends JPanel {
            if (nameField.getText().trim().isEmpty()){
                new JOptionPane("Please enter the instrument name", JOptionPane.WARNING_MESSAGE);
                return;
-               //TODO maybe put some more option panes here
            }
            
            String name = nameField.getText().trim();
@@ -151,13 +150,13 @@ public class SequencerSelector extends JPanel {
                platfomMap.computeIfAbsent(selectedPlatform, _ -> new ArrayList<>()).add(name);
                updatePlatform(selectedPlatform);
            }
-           else if (selectedPlatform.equals("PacificBioscience")) {
+           else if (selectedPlatform.equals("Pacific Bioscience")) {
                sequencer = new PacificBioscience(name, phredQuality, qualityConfidence, inputMass, flowCellPrice, reagentPrice,
                        libraryPrepPrice, indexingPrice, maxMultiplex, yield);
                platfomMap.computeIfAbsent(selectedPlatform, _ -> new ArrayList<>()).add(name);
                updatePlatform(selectedPlatform);
            }
-           else if (selectedPlatform.equals("OxfordNanopore")) {
+           else if (selectedPlatform.equals("Oxford Nanopore")) {
                sequencer = new OxfordNanopore(name, phredQuality, qualityConfidence, inputMass, flowCellPrice, reagentPrice,
                        libraryPrepPrice, indexingPrice, maxMultiplex, yield);
                platfomMap.computeIfAbsent(selectedPlatform, _ -> new ArrayList<>()).add(name);
@@ -252,10 +251,9 @@ public class SequencerSelector extends JPanel {
                String platform = object.get("platform").getAsString();
                switch (platform){
                    case "Illumina" -> customSequencers.add(gson.fromJson(line, Illumina.class));
-                   //TODO add the others
-                   
+                   case "Oxford Nanopore" -> customSequencers.add(gson.fromJson(line, OxfordNanopore.class));
+                   case "Pacific Bioscience" -> customSequencers.add(gson.fromJson(line, PacificBioscience.class));
                }
-               
            }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

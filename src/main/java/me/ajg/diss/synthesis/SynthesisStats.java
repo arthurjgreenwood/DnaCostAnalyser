@@ -10,7 +10,7 @@ import java.util.List;
 public class SynthesisStats {
     
     private static final double AVOGADRO = 6.022e23; //Avagadro's constant
-    private static final double NUCLEOTIDE_WEIGHT = 318 ; //318 g/mol expected weight of a nucleotide
+    private static final double NUCLEOTIDE_WEIGHT = 327 ; //327 g/mol expected weight of a nucleotide
     
     List<String> fileNames;
     String encodingAlgorithmUsed;

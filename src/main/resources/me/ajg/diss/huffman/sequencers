@@ -1,1 +1,2 @@
 {"platform":"Illumina","name":"NovaSeq X Plus 10B","qScore":30,"confidenceInQScore":90.0,"minimumInputMassNanoGrams":25.0,"flowCellPrice":8536.75,"reagentPrice":0.0,"libraryPrepPrice":35.5,"indexingPrice":5.63,"maxMultiplex":96,"yieldPerFlowCellInGb":6000.0}
+{"platform":"PacificBioscience","name":"test","qScore":30,"confidenceInQScore":90.0,"minimumInputMassNanoGrams":25.0,"flowCellPrice":1000.0,"reagentPrice":100.0,"libraryPrepPrice":100.0,"indexingPrice":100.0,"maxMultiplex":96,"yieldPerFlowCellInGb":500.0}
